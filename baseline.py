@@ -5,23 +5,17 @@ from math import ceil, floor
 def moving_average(x, w):
     h = ceil(w / 2)
     l = flow // 2
-
     new_x = np.concatenate([[0] * w, x, [0] * w])
-
     lower = w - l
     higher = w + h
-
     value = np.sum(new_x[w:w + h])
     size = h
-
     result = []
 
     for _ in range(len(x)):
         result.append(value / size)
-
         value += new_x[higher]
         value -= new_x[lower]
-
         lower += 1
         higher += 1
 
@@ -30,7 +24,6 @@ def moving_average(x, w):
 
         if higher <= len(x) + w:
             size += 1
-
     return np.array(result)
 
 
